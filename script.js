@@ -197,7 +197,44 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     app.innerHTML = '';
-    const today = new Date().toISOString().split('T')[0];
+    // Use the user's local date rather than UTC to avoid off‑by‑one errors.
+    // new Date().toISOString() returns a date in UTC; if the user is behind UTC the day
+    // will appear as yesterday. Convert to local ISO date by adjusting with the
+    // timezone offset. See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples for details.
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    const today = local.toISOString().split('T')[0];
+
+    // Determine if the journal is within its configured schedule. If the
+    // program has not started yet, or has ended (when a length is set),
+    // show an informative message instead of the entry form.
+    const start = cfg.startDate;
+    const programStart = new Date(start);
+    // Compute end date if a length is provided. The program length is in days
+    // and includes the start date itself, so subtract 1 when adding days.
+    let programEnd = null;
+    if (cfg.length && !isNaN(cfg.length)) {
+      const end = new Date(programStart);
+      end.setDate(end.getDate() + parseInt(cfg.length, 10) - 1);
+      programEnd = end;
+    }
+    const todayDateObj = new Date(today);
+    if (todayDateObj < programStart) {
+      app.innerHTML = '';
+      const section = document.createElement('section');
+      section.innerHTML = `<h2>Program Not Started</h2><p>Your journal begins on <strong>${cfg.startDate}</strong>. Please come back then to record your first entry.</p>`;
+      app.appendChild(section);
+      return;
+    }
+    if (programEnd && todayDateObj > programEnd) {
+      app.innerHTML = '';
+      const section = document.createElement('section');
+      const endDateStr = programEnd.toISOString().split('T')[0];
+      section.innerHTML = `<h2>Program Completed</h2><p>Your journal ended on <strong>${endDateStr}</strong>. You can review your history or reset the program in settings.</p>`;
+      app.appendChild(section);
+      return;
+    }
+
     const section = document.createElement('section');
     section.innerHTML = `<h2>Daily Entry for ${today}</h2>`;
     const form = document.createElement('form');
