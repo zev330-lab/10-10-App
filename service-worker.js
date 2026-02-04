@@ -1,12 +1,13 @@
-const CACHE_NAME = 'ten-ten-v3';
+// Bump the cache name to force clients to update their cache when a new version is deployed
+const CACHE_NAME = 'ten-ten-v5';
 const ASSETS = [
   './',
   './index.html',
   './styles.css',
   './script.js',
   './manifest.json',
-  './icon-192x192.png',
-  './icon-512x512.png'
+  './ten10-icon-192.png',
+  './ten10-icon-512.png'
 ];
 
 self.addEventListener('install', event => {
