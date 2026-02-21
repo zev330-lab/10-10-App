@@ -1,4 +1,4 @@
-const CACHE = 'ten10-v5.1';
+const CACHE = 'ten10-v5.2';
 const ASSETS = [
   './',
   './index.html',
