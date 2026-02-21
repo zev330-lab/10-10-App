@@ -351,6 +351,9 @@ body {
   text-align: center;
   transition: all var(--transition);
   color-scheme: dark;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
 }
 
 .reminder-time-input:focus {
@@ -943,16 +946,20 @@ body {
 }
 
 .settings-time-input {
-  padding: 8px 12px;
+  padding: 12px 14px;
   background: var(--bg-subtle);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   color: var(--text);
   outline: none;
   color-scheme: dark;
   transition: all var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  height: 48px;
 }
 
 .settings-time-input:focus {
