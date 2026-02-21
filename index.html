@@ -2,30 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10‑10 Journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a2744">
+  <title>10:10 Journal</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
-  <!-- Explicitly specify icons to avoid OS-level caching -->
   <link rel="icon" href="ten10-icon-192.png">
   <link rel="apple-touch-icon" href="ten10-icon-512.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>10‑10 Journal</h1>
-    <nav>
-      <button id="nav-setup" class="nav-btn">Setup</button>
-      <button id="nav-entry" class="nav-btn">Entry</button>
-      <button id="nav-history" class="nav-btn">History</button>
-      <button id="nav-settings" class="nav-btn">Settings</button>
-    </nav>
-  </header>
-  <main id="app">
-    <!-- Content injected by script.js -->
-  </main>
-  <footer>
-    <span id="version"></span>
-  </footer>
+  <div id="app-shell">
+    <header id="header">
+      <div class="header-inner">
+        <h1 class="logo">10<span class="colon">:</span>10</h1>
+        <p class="tagline">Daily Journal</p>
+      </div>
+      <nav id="nav">
+        <button class="nav-btn active" data-page="entry"><span class="nav-icon">✦</span><span class="nav-label">Today</span></button>
+        <button class="nav-btn" data-page="history"><span class="nav-icon">◷</span><span class="nav-label">History</span></button>
+        <button class="nav-btn" data-page="setup"><span class="nav-icon">◎</span><span class="nav-label">Setup</span></button>
+      </nav>
+    </header>
+    <main id="main">
+      <!-- Content rendered by script.js -->
+    </main>
+    <footer>
+      <span id="streak-display"></span>
+      <span id="version"></span>
+    </footer>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
